@@ -1,0 +1,67 @@
+todo en cmd, powershell no me ayuda
+---------
+codeigniter
+
+composer create-project codeigniter4/appstarter nombre-proyecto
+
+php spark serve
+
+-------
+
+laravel
+
+composer create-project laravel/laravel NOMBREDELPROYECTO
+
+php artisan serve
+
+php artisan migrate
+
+-------
+
+flask
+
+# Crear carpeta del proyecto
+mkdir proyFlask
+cd proyFlask
+
+# Crear entorno virtual (Windows)
+python -m venv venv
+
+venv\Scripts\activate
+
+source venv/Scripts/actívate
+
+pip install flask
+
+#cerrar entorno      deactivate
+# Crear archivos del proyecto
+git
+
+#correr
+python app.py
+
+--------
+
+node
+
+mkdir proyNode
+cd proyNode
+
+npm init -y
+
+# Crear archivos del proyecto
+git
+
+npm install
+
+#importante
+
+npm install express-ejs-layouts
+
+npm install express mysql2 ejs express-session connect-flash dotenv
+npm install --save-dev nodemon
+
+npm install express ejs mysql2 dotenv express-session body-parser
+npm install -D nodemon
+
+npm run dev

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Eventos - Editar Evento</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { background: #2c3e50; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        nav ul { display: flex; list-style: none; gap: 15px; margin-top: 10px; }
+        nav a { color: white; text-decoration: none; padding: 8px 15px; background: #34495e; border-radius: 4px; }
+        nav a:hover, nav a.active { background: #1abc9c; }
+        .form-container { background: white; padding: 30px; border-radius: 8px; max-width: 500px; margin: 0 auto; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
+        .btn { display: inline-block; padding: 8px 15px; text-decoration: none; border-radius: 4px; border: none; cursor: pointer; margin: 2px; }
+        .btn-primary { background: #3498db; color: white; }
+        .btn-cancel { background: #95a5a6; color: white; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gestión de Eventos</h1>
+            <nav>
+                <ul>
+                    <li><a href="/eventos">Eventos</a></li>
+                    <li><a href="/lugares">Lugares</a></li>
+                    <li><a href="/roles">Roles</a></li>
+                    <li><a href="/asistentes">Asistentes</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <h2>Editar Evento</h2>
+        
+        <div class="form-container">
+            <form method="post" action="/eventos/actualizar/<%= registro.id %>">
+                <div class="form-group">
+                    <label>Nombre del Evento:</label>
+                    <input type="text" name="nombre" value="<%= registro.nombre %>" required>
+                </div>
+                <div class="form-group">
+                    <label>Fecha:</label>
+                    <%
+                        // Formatear fecha para el input type="date"
+                        let fechaValue = '';
+                        if (registro.fecha) {
+                            const fecha = new Date(registro.fecha);
+                            fechaValue = fecha.toISOString().split('T')[0];
+                        }
+                    %>
+                    <input type="date" name="fecha" value="<%= fechaValue %>" required>
+                </div>
+                <div class="form-group">
+                    <label>Lugar:</label>
+                    <select name="lugar_id" required>
+                        <option value="">Seleccionar lugar</option>
+                        <% if (lugares && lugares.length > 0) { %>
+                            <% lugares.forEach(function(lugar) { %>
+                                <option value="<%= lugar.id %>" <%= lugar.id == registro.lugar_id ? 'selected' : '' %>>
+                                    <%= lugar.nombre %>
+                                </option>
+                            <% }); %>
+                        <% } else { %>
+                            <option value="" disabled>No hay lugares disponibles</option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Organizador (Rol):</label>
+                    <select name="organizador_id" required>
+                        <option value="">Seleccionar rol</option>
+                        <% if (roles && roles.length > 0) { %>
+                            <% roles.forEach(function(rol) { %>
+                                <option value="<%= rol.id %>" <%= rol.id == registro.organizador_id ? 'selected' : '' %>>
+                                    <%= rol.nombre %>
+                                </option>
+                            <% }); %>
+                        <% } else { %>
+                            <option value="" disabled>No hay roles disponibles</option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                    <a href="/eventos" class="btn btn-cancel">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

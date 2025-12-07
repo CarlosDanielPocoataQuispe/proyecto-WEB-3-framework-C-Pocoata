@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Eventos - Gestión de Eventos{% endblock %}
+
+{% block content %}
+    <h2>Eventos</h2>
+    
+    <!-- Botón para crear nuevo evento -->
+    <div style="margin-bottom: 20px;">
+        <a href="{{ url_for('evento.crear') }}" class="btn btn-primary">Nuevo Evento</a>
+    </div>
+    
+    <!-- Tabla de eventos -->
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Fecha</th>
+                    <th>Lugar</th>
+                    <th>Organizador</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evento in eventos %}
+                <tr>
+                    <td>{{ evento.id }}</td>
+                    <td>{{ evento.nombre }}</td>
+                    <td>{{ evento.fecha }}</td>
+                    <td>{{ evento.lugar_nombre or 'No asignado' }}</td>
+                    <td>{{ evento.rol_nombre or 'No asignado' }}</td>
+                    <td>
+                        <!-- Botones de acciones -->
+                        <a href="{{ url_for('evento.editar', id=evento.id) }}" class="btn btn-edit">Editar</a>
+                        <a href="{{ url_for('evento.eliminar', id=evento.id) }}" class="btn btn-delete">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    
+{% endblock %}

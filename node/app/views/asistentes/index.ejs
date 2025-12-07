@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión Eventos - Asistentes</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        header { background: #2c3e50; color: white; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        nav ul { display: flex; list-style: none; gap: 15px; margin-top: 10px; }
+        nav a { color: white; text-decoration: none; padding: 8px 15px; background: #34495e; border-radius: 4px; }
+        nav a:hover, nav a.active { background: #1abc9c; }
+        .alert { background: #d4edda; color: #155724; padding: 10px; border-radius: 4px; margin: 10px 0; }
+        table { width: 100%; background: white; border-collapse: collapse; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #ecf0f1; }
+        tr:hover { background: #f9f9f9; }
+        .btn { display: inline-block; padding: 8px 15px; text-decoration: none; border-radius: 4px; border: none; cursor: pointer; margin: 2px; }
+        .btn-primary { background: #3498db; color: white; }
+        .btn-edit { background: #2ecc71; color: white; }
+        .btn-delete { background: #e74c3c; color: white; }
+        .btn:hover { opacity: 0.9; }
+        .actions { margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gestión de Eventos</h1>
+            <nav>
+                <ul>
+                    <li><a href="/eventos">Eventos</a></li>
+                    <li><a href="/lugares">Lugares</a></li>
+                    <li><a href="/roles">Roles</a></li>
+                    <li><a href="/asistentes" class="active">Asistentes</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <h2>Asistentes</h2>
+        
+        <% if (mensaje) { %>
+            <div class="alert"><%= mensaje %></div>
+        <% } %>
+        
+        <div class="actions">
+            <a href="/asistentes/crear" class="btn btn-primary">Nuevo Asistente</a>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Contacto</th>
+                    <th>Evento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% registros.forEach(function(r) { %>
+                    <tr>
+                        <td><%= r.id %></td>
+                        <td><%= r.nombre %></td>
+                        <td><%= r.contacto %></td>
+                        <td><%= r.evento_nombre %></td>
+                        <td>
+                            <a href="/asistentes/editar/<%= r.id %>" class="btn btn-edit">Editar</a>
+                            <a href="/asistentes/eliminar/<%= r.id %>" class="btn btn-delete">Eliminar</a>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

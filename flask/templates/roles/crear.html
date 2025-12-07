@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Rol - Gestión de Eventos{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Crear Nuevo Rol</h2>
+        
+        <form method="POST" action="{{ url_for('rol.crear') }}">
+            <!-- Campo Nombre -->
+            <div class="form-group">
+                <label for="nombre">Nombre del Rol:</label>
+                <input type="text" id="nombre" name="nombre" required 
+                       placeholder="Ej: Organizador, Coordinador, Director">
+            </div>
+            
+            <!-- Botones -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{{ url_for('rol.index') }}" class="btn">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

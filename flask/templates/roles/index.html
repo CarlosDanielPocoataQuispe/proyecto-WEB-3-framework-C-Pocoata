@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+
+{% block title %}Roles Organizador - Gestión de Eventos{% endblock %}
+
+{% block content %}
+    <h2>Organizador</h2>
+    
+    <!-- Botón para crear nuevo rol -->
+    <div style="margin-bottom: 20px;">
+        <a href="{{ url_for('rol.crear') }}" class="btn btn-primary">Nuevo Rol</a>
+    </div>
+    
+    <!-- Tabla de roles -->
+
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rol in roles %}
+                <tr>
+                    <td>{{ rol.id }}</td>
+                    <td>{{ rol.nombre }}</td>
+                    <td>
+                        <!-- Botones de acciones -->
+                        <a href="{{ url_for('rol.editar', id=rol.id) }}" class="btn btn-edit">Editar</a>
+                        <a href="{{ url_for('rol.eliminar', id=rol.id) }}" class="btn btn-delete">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

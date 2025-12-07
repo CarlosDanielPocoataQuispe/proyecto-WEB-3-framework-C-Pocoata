@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Asistentes - Gestión de Eventos{% endblock %}
+
+{% block content %}
+    <h2>Asistentes</h2>
+    
+    <!-- Botón para crear nuevo asistente -->
+    <div style="margin-bottom: 20px;">
+        <a href="{{ url_for('asistente.crear') }}" class="btn btn-primary">Nuevo Asistente</a>
+    </div>
+    
+    <!-- Tabla de asistentes -->
+    
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Contacto</th>
+                    <th>Evento</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for asistente in asistentes %}
+                <tr>
+                    <td>{{ asistente.id }}</td>
+                    <td>{{ asistente.nombre }}</td>
+                    <td>{{ asistente.contacto }}</td>
+                    <td>{{ asistente.evento_nombre or 'No asignado' }}</td>
+                    <td>
+                        <!-- Botones de acciones -->
+                        <a href="{{ url_for('asistente.editar', id=asistente.id) }}" class="btn btn-edit">Editar</a>
+                        <a href="{{ url_for('asistente.eliminar', id=asistente.id) }}"class="btn btn-delete">Eliminar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+{% endblock %}

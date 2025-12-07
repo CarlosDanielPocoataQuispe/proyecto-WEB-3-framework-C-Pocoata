@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Evento - Gestión de Eventos{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Editar Evento</h2>
+        
+        <form method="POST" action="{{ url_for('evento.editar', id=evento.id) }}">
+            <!-- Campo Nombre -->
+            <div class="form-group">
+                <label for="nombre">Nombre del Evento:</label>
+                <input type="text" id="nombre" name="nombre" 
+                       value="{{ evento.nombre }}" required>
+            </div>
+            
+            <!-- Campo Fecha -->
+            <div class="form-group">
+                <label for="fecha">Fecha:</label>
+                <input type="date" id="fecha" name="fecha" 
+                       value="{{ evento.fecha }}" required>
+            </div>
+            
+            <!-- Campo Lugar -->
+            <div class="form-group">
+                <label for="lugar_id">Lugar:</label>
+                <select id="lugar_id" name="lugar_id" required>
+                    <option value="">Seleccionar lugar</option>
+                    {% for lugar in lugares %}
+                        <option value="{{ lugar.id }}" 
+                                {% if lugar.id == evento.lugar_id %}selected{% endif %}>
+                            {{ lugar.nombre }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <!-- Campo Rol Organizador -->
+            <div class="form-group">
+                <label for="organizador_id">Rol Organizador:</label>
+                <select id="organizador_id" name="organizador_id" required>
+                    <option value="">Seleccionar rol</option>
+                    {% for rol in roles %}
+                        <option value="{{ rol.id }}" 
+                                {% if rol.id == evento.organizador_id %}selected{% endif %}>
+                            {{ rol.nombre }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <!-- Botones -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+                <a href="{{ url_for('evento.index') }}" class="btn">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

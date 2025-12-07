@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Asistente - Gestión de Eventos{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Crear Nuevo Asistente</h2>
+        
+        <form method="POST" action="{{ url_for('asistente.crear') }}">
+            <!-- Campo Nombre -->
+            <div class="form-group">
+                <label for="nombre">Nombre del Asistente:</label>
+                <input type="text" id="nombre" name="nombre" required 
+                       placeholder="Ej: Juan Pérez">
+            </div>
+            
+            <!-- Campo Contacto -->
+            <div class="form-group">
+                <label for="contacto">Contacto:</label>
+                <input type="text" id="contacto" name="contacto" required 
+                       placeholder="Email o teléfono">
+            </div>
+            
+            <!-- Campo Evento -->
+            <div class="form-group">
+                <label for="evento_id">Evento:</label>
+                <select id="evento_id" name="evento_id" required>
+                    <option value="">Seleccionar evento</option>
+                    {% for evento in eventos %}
+                        <option value="{{ evento.id }}">{{ evento.nombre }} ({{ evento.fecha }})</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <!-- Botones -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{{ url_for('asistente.index') }}" class="btn">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

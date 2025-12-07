@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Crear Lugar - Gestión de Eventos{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h2>Crear Nuevo Lugar</h2>
+        
+        <form method="POST" action="{{ url_for('lugar.crear') }}">
+            <!-- Campo Nombre -->
+            <div class="form-group">
+                <label for="nombre">Nombre del Lugar:</label>
+                <input type="text" id="nombre" name="nombre" required 
+                       placeholder="Ej: Auditorio Central">
+            </div>
+            
+            <!-- Campo Dirección -->
+            <div class="form-group">
+                <label for="direccion">Dirección:</label>
+                <input type="text" id="direccion" name="direccion" required 
+                       placeholder="Ej: Av. Principal 123">
+            </div>
+            
+            <!-- Botones -->
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="{{ url_for('lugar.index') }}" class="btn">Cancelar</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}
